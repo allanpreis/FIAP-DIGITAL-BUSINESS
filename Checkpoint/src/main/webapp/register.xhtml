@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<style type="text/css">
+	@import "resources/css/style.css";
+</style>
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="content">
+		<p:messages id="messages"><p:autoUpdate /></p:messages>
+		<h:form>
+		<p:card class="form-card">
+		    <f:facet name="title">
+		       New Register
+		    </f:facet>
+		   <div class="p-field p-grid">
+			    <h:outputLabel for="name" class="p-col-fixed" style="width:100px" value="Name" />
+			    <div class="p-col" style="display: grid">
+			        <p:inputText id="name" value="#{registerBean.register.name}" required="true" requiredMessage="The name field is required">
+			        	<f:ajax event="blur" render="messages" />
+			        </p:inputText>
+			    </div>
+			</div>
+			<div class="p-field p-grid">
+				<h:outputLabel for="email" class="p-col-fixed" style="width:100px" value="Email" />
+				<div class="p-col" style="display: grid">
+					<p:inputText id="email" value="#{registerBean.register.email}" required="true" requiredMessage="The email field is required">
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+				</div>
+			</div>
+			<div class="p-field p-grid">
+				<h:outputLabel for="password" class="p-col-fixed" value="Password" />
+				<div class="p-col">
+					<p:password id="password" toggleMask="true" redisplay="true" value="#{registerBean.register.password}" required="true" requiredMessage="The password field is required">
+						<f:ajax event="blur" render="messages" />
+					</p:password>
+				</div>
+			</div>
+			<div class="p-field p-grid">
+			    <label for="address" class="p-col-fixed" style="width:100px">Address</label>
+			    <div class="p-col" style="display: grid">
+			        <p:inputText id="address" value="#{registerBean.register.address}" required="true" requiredMessage="The address field is required">
+			        	<f:ajax event="blur" render="messages" />
+			        </p:inputText>
+			    </div>
+			</div>
+			<div class="p-field p-grid">
+			    <label for="age" class="p-col-fixed" style="width: 100px">Age</label>
+			    <div class="p-col">
+			        <p:inputText id="age" value="#{registerBean.register.age}" converterMessage="The age field must be a number">
+			        	<f:validateDoubleRange minimum="0" />
+			        	<f:ajax event="blur" render="messages" />
+			        </p:inputText>
+			    </div>
+			</div>
+			
+		    <f:facet name="footer">
+		        <p:commandButton icon="pi pi-check" value="Save" action="#{registerBean.save}">
+		        	<f:ajax execute="@form" render="messages" />
+		        </p:commandButton>
+		        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+		    </f:facet>
+		</p:card>
+		
+		<p:dataTable value="#{registerBean.registers}" var="register">
+			<p:column headerText="Name">
+				<h:outputText value="#{register.name}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{register.email}" />
+			</p:column>
+			<p:column headerText="Age">
+				<h:outputText value="#{register.age}" />
+			</p:column>
+		</p:dataTable>
+		
+		
+		
+		
+		
+		
+		</h:form>
+		
+		
+		
+		
+	</ui:define>
+</ui:composition>
+		
+		
+		
+		
+</html>
